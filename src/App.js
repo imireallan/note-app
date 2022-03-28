@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Favorites from "./components/Notes/Favorites";
+import Home from "./components/Home";
+import LayOut from "./components/Layout";
+import NoteDetail from "./components/Notes/NoteDetail";
+import EditForm from "./components/Forms/EditForm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="" element={<LayOut />} />
+          <Route path="favorites" element={<Favorites />}>
+            <Route path="notes/:id" element={<NoteDetail />} />
+            <Route path="edit-note/:id" element={<EditForm />} />
+          </Route>
+          <Route path="notes/:id" element={<NoteDetail />} />
+          <Route path="edit-note/:id" element={<EditForm />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
